@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {MenuItem} from "primeng/api";
-import {FormBuilder} from "@angular/forms";
-import {LoginPageService} from "../login-page/service/login-page.service";
+
 import {loginPage} from "../login-page/model/login-page";
 import {Router} from "@angular/router";
 
