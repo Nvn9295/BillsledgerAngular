@@ -1,0 +1,19 @@
+#cont {
+  width: 340px;
+  height: 260px;
+  /*border: 2px solid black;*/
+  box-shadow: 1px 1px 10px gray;
+  margin: 50px;
+  border-radius: 10px;
+  background-image: linear-gradient(lightcyan, pink, paleturquoise, slategray);
+}
+
+#insideCont {
+  position: relative;
+  top: 20px;
+  left: 10px;
+}
+
+#number {
+  margin-left: 18px;
+}

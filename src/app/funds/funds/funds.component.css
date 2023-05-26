@@ -1,0 +1,28 @@
+
+#source {
+  margin-left: 96px;
+}
+
+#creditBy {
+  margin-left: 80px;
+}
+
+#amount {
+  margin-left: 87px;
+  height: 40px;
+}
+
+#comment {
+  margin-left: 78px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+#fundsCard {
+  margin-left: 50px;
+}
+
+

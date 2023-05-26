@@ -1,0 +1,45 @@
+<div class="container">
+
+  <div class="row mar-top">
+    <div class="col-6">
+      <img src="../assets/Screenshot 2023-03-07 115127.png" style="max-height: 100%; max-width: 100%;">
+    </div>
+    <div class="col-3">
+      <p-card>
+        <h3>Login Page</h3>
+        <br>
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+            <span class="p-float-label">
+                <input formControlName="userName" id="float-input" pInputText placeholder="Enter User Name" type="text">
+                <label for="float-input">Username</label>
+              <div *ngIf="loginForm.get('userName')?.invalid && loginForm.get('userName')?.touched" class="text-danger">
+                <small *ngIf="loginForm.get('userName')?.errors?.['required']">User Name is Required</small>
+                <small
+                  *ngIf="loginForm.get('userName')?.errors?.['minlength']">Username must have minimum 4 characters</small>
+              </div>
+            </span>
+          <br><br>
+          <span class="p-float-label">
+                <input formControlName="password" id="float-input1" pInputText placeholder="Enter Password"
+                       type="password">
+                <label for="float-input1">Password</label>
+              <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
+               <small *ngIf="loginForm.get('password')?.errors?.['required']"> Password is required </small>
+                <small *ngIf="loginForm.get('password')?.errors?.['minlength']"> Minimum length of password is 4 characters</small>
+              </div>
+            </span>
+          <br><br>
+          <p-button [disabled]="loginForm.invalid" label="Sign in" type="submit"></p-button>
+        </form>
+      </p-card>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

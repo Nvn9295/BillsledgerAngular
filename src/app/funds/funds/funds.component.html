@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <p-card class="card">
+        <h4 class="funds">Funds</h4>
+        <form [formGroup]="fundsDetails" action="">
+          Source:<sup class="text-danger">*</sup>
+          <p-dropdown [options]="banks" [showClear]="true" class="fund" formControlName="source" id="source"
+                      optionLabel="bankName" optionValue="bankName" placeholder="Select a bank"></p-dropdown>&nbsp;
+          <p-button (click)="addNewSource()" *ngIf="userType" icon="pi pi-plus"></p-button>
+          <br><br>
+          Credit By:<sup class="text-danger">*</sup>
+          <p-dropdown [options]="names" [showClear]="true" class="fund" formControlName="creditBy" id="creditBy"
+                      optionLabel="creditBy" optionValue="creditBy" placeholder="Select a credit by"></p-dropdown>
+          <br><br>
+          Amount:<sup class="text-danger">*</sup>
+          <p-inputNumber class="fund" formControlName="amount" id="amount" placeholder="Enter amount" [locale]="'en-IN'" currency="INR"/>
+          <br><br>
+          Comment:<textarea cols="22" formControlName="comment" id="comment" pInputTextarea rows="1" placeholder=" write ...."></textarea>
+          <br><br>
+          <p-button (click)="submit()" [disabled]="fundsDetails.invalid">Submit</p-button>&nbsp;
+        </form>
+      </p-card>
+    </div>
+  </div>
+  <div class="col-7" id="fundsCard">
+    <h5>Funds Details</h5>
+    <p-table [paginator]="true" [rowsPerPageOptions]="[5,15,20]" [rows]="5" [showCurrentPageReport]="true"
+             [tableStyle]="{'min-width': '33rem'}"
+             [value]="funds"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Amount</th>
+          <th>Credit By</th>
+          <th>Source</th>
+          <th>Comment</th>
+        </tr>
+      </ng-template>
+      <ng-template let-fund let-i="rowIndex" pTemplate="body">
+        <tr>
+          <td>{{i + 1}}</td>
+          <td>{{fund.amount | currency :"INR":"symbol":"0.00"}}</td>
+          <td>{{fund.creditBy}}</td>
+          <td>{{fund.source}}</td>
+          <td>{{fund.comment}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+</div>
+

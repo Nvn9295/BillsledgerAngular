@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="row col-5">
+    <p-card>
+      <h5>User Registration</h5>
+      <form [formGroup]="userInputData">
+        <div class="row mt-4">
+          <div class="col-2">
+            <label>User Name:<sup class="text-danger">*</sup> </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="userName" pInputText placeholder="Enter Username" type="text"/>
+            <div *ngIf="userInputData.get('userName')?.invalid && userInputData.get('userName')?.touched"
+                 class="text-danger">
+              <small *ngIf="userInputData.get('userName')?.errors?.['required']">Username is required</small>
+              <small *ngIf="userInputData.get('userName')?.errors?.['minlength']">Username must have minimum 3
+                characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-2">
+            <label>Password:<sup class="text-danger">*</sup></label>
+          </div>
+          <div class="col-8">
+            <input formControlName="password" pInputText placeholder="Enter Password" type="password"/>
+            <div *ngIf="userInputData.get('password')?.invalid && userInputData.get('password')?.touched"
+                 class="text-danger">
+              <small *ngIf="userInputData.get('password')?.errors?.['required']">Password is required</small>
+              <small *ngIf="userInputData.get('password')?.errors?.['minlength']">Password should have at least 4
+                characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-2">
+            <label>Email:<sup class="text-danger">*</sup></label>
+          </div>
+          <div class="col-8">
+            <input formControlName="email" pInputText pattern="[a-z0-9._%+-]+@gmail.com$" placeholder="Enter Email"
+                   type="email">
+            <div *ngIf="userInputData.get('email')?.invalid && userInputData.get('email')?.touched" class="text-danger">
+              <small *ngIf="userInputData.get('email')?.errors?.['required']">Email is required</small>
+              <small *ngIf="userInputData.get('email')?.errors?.['pattern']">Email should end with@gmail.com</small>
+              <br>
+              <small *ngIf="userInputData.get('email')?.errors?.['minlength']">Email should have at least 4
+                characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-2">
+            <label>Profile Name:<sup class="text-danger">*</sup> </label>
+          </div>
+          <div class="col-8">
+            <input formControlName="profileName" pInputText placeholder="Enter Profile Name" type="text"/>
+            <div *ngIf="userInputData.get('profileName')?.invalid && userInputData.get('profileName')?.touched"
+                 class="text-danger">
+              <small *ngIf="userInputData.get('profileName')?.errors?.['required']">Profile Name is required</small>
+              <small *ngIf="userInputData.get('profileName')?.errors?.['minlength']">Profile Name should have at least 4
+                characters</small>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-2">
+            <label>Role: <sup class="text-danger">*</sup></label>
+          </div>
+          <div class="col-8">
+            <p-dropdown [options]="roles" formControlName="role" optionLabel="roles" optionValue="roles"
+                        placeholder="Select"></p-dropdown>
+<!--            <p-button (click)="showDialog()" class="m-1" icon="pi pi-plus"></p-button>-->
+            <p-dialog [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+                      [style]="{ width: '25vw' ,height : '32vh'}" header="Role">
+              <div class="col-6">
+                <input formControlName="roles" pInputText placeholder="Enter Role" type="text"/>
+                <div class="m-1">
+                  <p-button (onClick)="saveRole()" label="save"></p-button>
+                </div>
+              </div>
+            </p-dialog>
+          </div>
+        </div>
+        <br>
+        <p-button (onClick)="addNewUser()" [disabled]="userInputData.invalid">Save</p-button>&nbsp;
+      </form>
+    </p-card>
+  </div>
+  <div class="row mt-3 col-6" id="userCard">
+    <h5>Login Users Details</h5>
+    <p-table [paginator]="true" [rowsPerPageOptions]="[10,25,50]" [rows]="6" [showCurrentPageReport]="true"
+             [tableStyle]="{'min-width': '20rem'}"
+             [value]="loginUsersDetails"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>S.No</th>
+          <th>User Name</th>
+          <th>Password</th>
+          <th>Email</th>
+          <th>Profile Name</th>
+          <th>Role</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template let-i="rowIndex" let-users pTemplate="body">
+        <tr>
+          <td>{{i + 1}}</td>
+          <td>{{users.userName}}</td>
+          <td>{{ maskPassword(users.password) }}</td>
+          <td>{{users.email}}</td>
+          <td>{{users.profileName}}</td>
+          <td>{{users.role}}</td>
+          <td>
+            <p-button (click)="deleteUser(users.id)">Delete</p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

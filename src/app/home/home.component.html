@@ -1,0 +1,24 @@
+<div>
+  <div class="row">
+    <p-menubar [model]="items">
+      <ng-template pTemplate="start">
+        <img class="mr-2" height="90" src="../assets/maxresdefault.jpg" width="180">
+      </ng-template>
+      <ng-template pTemplate="end">
+        <p-menubar [model]="item"></p-menubar>
+      </ng-template>
+    </p-menubar>
+  </div>
+  <div class="row mt-5">
+    <div class="col-2">
+      <p-menu [model]="menuItems"></p-menu>
+    </div>
+    <div class="col-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+
+

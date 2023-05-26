@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row col-6">
+    <p-card>
+      <form [formGroup]="personName">
+        <h5>Person Details</h5>
+        <br>
+        <label>Person Name:</label>&nbsp;&nbsp;
+        <input formControlName="userName" id="name" pattern="^[A-Z]{1}[a-z]{2,}" pInputText type="text"/>
+        <div class="text-danger" *ngIf="personName.get('userName')?.invalid && personName.get('userName')?.touched">
+          <small *ngIf="personName.get('userName')?.errors?.['pattern']">Only characters are allowed and starting letter should be in Upper Case</small>
+        </div>
+        <br><br>
+        <label>Mobile No:</label>&nbsp;&nbsp;
+        <input formControlName="number" id="number" pInputText type="text"/>
+        <br><br>
+        <p-button (onClick)="personDetailsSubmit()" [disabled]="personName.invalid">Submit</p-button>&nbsp;&nbsp;
+      </form>
+    </p-card>
+  </div>
+</div>
+
+
+

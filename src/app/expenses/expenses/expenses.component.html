@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="col-10">
+      <p-card>
+        <h5>Funds &nbsp;<small class=" pi pi-info-circle"
+                               style="color:white;background-color:gray;border-radius: 10px;border: 2px solid black"
+                               title="Total Balance = Bank Balance + Wallet Balance"></small>
+        </h5>
+        <div class="row mt-3">
+          <div class="col-2">
+            Total Balance:
+          </div>
+          <div class="col-2">
+            <p-inputNumber [(ngModel)]="totalBalance" [disabled]="true"></p-inputNumber>
+          </div>
+          <div class="col-2 " id="bankBalance">
+            Bank Balance:
+          </div>
+          <div class="col-2">
+            <p-inputNumber [(ngModel)]="bankBalance" [disabled]="true"></p-inputNumber>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-2 " id="transferAmount">
+            Wallet Balance:
+          </div>
+          <div class="col-2">
+            <p-inputNumber [(ngModel)]="walletBalance" [disabled]="true"></p-inputNumber>
+          </div>
+        </div>
+      </p-card>
+      <br>
+      <div class="col-6">
+        <p-card>
+          <h5>Expenses</h5>
+          <form [formGroup]="expensesData" action="">
+            Date:<sup class="text-danger">*</sup>
+            <p-calendar dateFormat="dd-mm-yy" formControlName="date" id="date"></p-calendar>
+            <br><br>
+            Transaction Category:
+            <input formControlName="transactionDetails" id="transactionCategory" pInputText placeholder="PF's,Salary"
+                   type="text"/>
+            <br><br>
+            Amount:<sup class="text-danger">*</sup>
+            <p-inputNumber formControlName="amount" id="amount" placeholder="Enter amount" [locale]="'en-IN'" currency="INR"/>
+            <br>
+            <small *ngIf="visible" class="text-danger">{{message}}</small>
+            <br>
+            Expense Category:
+            <input formControlName="expensesCategory" id="expenseCategory" pInputText
+                   placeholder="Stationery,Company,Maidsal"
+                   type="text"/>
+            <br><br>
+            Source:<sup class="text-danger">*</sup>
+            <p-dropdown [options]="banks" [showClear]="true" formControlName="source" id="source"
+                        optionLabel="bankName" optionValue="bankName" placeholder="Select a source"></p-dropdown>
+            <br><br>
+            Spent By:<sup class="text-danger">*</sup>
+            <p-dropdown [options]="names" [showClear]="true" formControlName="spentBy" id="spentBy"
+                        optionLabel="userName" optionValue="userName" placeholder="Select a person"></p-dropdown>
+            <br><br>
+            Attachment:
+            <div class="">
+              <p-fileUpload #fileUpload (uploadHandler)="saveImage($event,fileUpload)"
+                            [customUpload]="true"
+                            [maxFileSize]="1000000" accept="{{acceptedFiles}}"
+                            name="image">
+              </p-fileUpload>
+            </div>
+            <br>
+            <p-button (onClick)="submit()" [disabled]="expensesData.invalid">Submit</p-button>
+          </form>
+        </p-card>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3 col-6" id="expensesTable">
+    <h5>Expenses Details</h5>
+    <p-table [paginator]="true" [rowsPerPageOptions]="[5,10,15]" [rows]="6" [showCurrentPageReport]="true"
+             [tableStyle]="{'min-width': '30rem'}"
+             [value]="expensesDetails"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Spent By</th>
+          <th>Transaction Category</th>
+          <th>Expenses Category</th>
+          <th>Source</th>
+          <th>Attachment</th>
+        </tr>
+      </ng-template>
+      <ng-template let-data let-i="rowIndex" pTemplate="body">
+        <tr>
+          <td>{{i + 1}}</td>
+          <td>{{data.date | date}}</td>
+          <td>{{data.amount |  currency:'INR':'symbol':'1.0-0' }}</td>
+          <td>{{data.spentBy}}</td>
+          <td>{{data.transactionDetails}}</td>
+          <td>{{data.expensesCategory}}</td>
+          <td>{{data.source}}</td>
+          <td class="text-center"><a href="http://localhost:8080/get-file/{{data.billReceipt}}" target="_blank"><i
+            class="pi pi-eye"></i></a></td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

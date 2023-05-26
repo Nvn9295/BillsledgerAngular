@@ -1,0 +1,35 @@
+
+#date {
+  margin-left: 145px;
+}
+
+#transactionCategory {
+  margin-left: 29px;
+}
+
+#amount {
+  margin-left: 121px;
+}
+
+#expenseCategory {
+  margin-left: 52px;
+}
+
+#source {
+  margin-left: 130px;
+}
+
+#spentBy {
+  margin-left: 115px;
+}
+
+#bankBalance {
+  margin-left: 105px;
+}
+
+#expensesTable {
+  position: absolute;
+  top: 450px;
+  margin-left: 500px;
+}
+
