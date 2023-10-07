@@ -19,4 +19,5 @@ export class LoginPageInterceptor implements HttpInterceptor {
   }
 }
 
-// b
+// After adding request go to AppComponent.module.ts
+// and add DATA IN Providers[]
