@@ -9,7 +9,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ExpensesComponent} from './expenses/expenses/expenses.component';
 import {TransferFundsComponent} from './transfer-funds/transfer-funds/transfer-funds.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FundsComponent} from './funds/funds/funds.component';
 import {TableModule} from "primeng/table";
 import {BanksComponent} from './banks/banks/banks.component';
@@ -28,6 +28,7 @@ import {HomeComponent} from './home/home.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {DialogModule} from 'primeng/dialog';
 import {LOCALE_ID} from '@angular/core';
+import { LoginPageInterceptor } from './login-page/login-page.interceptor';
 
 
 
@@ -64,10 +65,9 @@ import {LOCALE_ID} from '@angular/core';
     InputTextareaModule,
     DialogModule
   ],
-  providers: [{
-    provide: LOCALE_ID,
-    useValue: 'en-IN'
-  },],
+  providers: [
+    {provide: LOCALE_ID,useValue: 'en-IN'},
+    {provide:HTTP_INTERCEPTORS, useClass : LoginPageInterceptor,multi : true},],
   bootstrap: [AppComponent]
 })
 export class AppModule {
