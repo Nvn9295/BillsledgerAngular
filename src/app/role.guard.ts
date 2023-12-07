@@ -6,11 +6,11 @@ import {CanActivate} from '@angular/router';
 })
 export class RoleGuard implements CanActivate {
   canActivate() {
-    let role = localStorage.getItem("userType");
-    if (role == "admin") {
-      return true;
+    // let role = localStorage.getItem("userType");
+    if( localStorage.getItem("userType")  == null){
+        return false;
     }
-    return false;
+  return true;
   }
 
 }
